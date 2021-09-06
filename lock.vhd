@@ -46,6 +46,7 @@ begin
 	process (PUSH)
 	begin
 		if rising_edge(PUSH) then
+			-- when pushed button is digit
 			if NUMBER <= 9 then
 				if STATE = 0 or STATE = 7 then
 					PASSWORD(0 to 3) <=  NUMBER;
@@ -72,6 +73,7 @@ begin
 					NEW_PASSWORD(12 to 15) <= NUMBER;
 					STATE <= STATE + 1;
 				end if;
+			-- when pushed button is E - clearing
 			elsif NUMBER = 15 then
 				if STATE = 1 or STATE = 8 then
 					PASSWORD(0 to 3) <=  "0000";
@@ -98,6 +100,7 @@ begin
 					NEW_PASSWORD(12 to 15) <= "0000";
 					STATE <= STATE - 1;
 				end if;
+			-- when pushed button is E - confirm password
 			elsif NUMBER = 14 then
 				if STATE = 4 or STATE = 11then
 					if CORRECT_PASSWORD = PASSWORD then
@@ -116,6 +119,7 @@ begin
 					STATE <= "00000";
 					CORRECT_PASSWORD <= NEW_PASSWORD;
 				end if;
+			-- when pushed button is A - changing password
 			elsif NUMBER = 10 then
 				if STATE = 0 then
 					STATE <= "00111";

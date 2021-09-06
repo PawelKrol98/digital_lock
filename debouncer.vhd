@@ -30,7 +30,7 @@ begin
 				count := count + 1;
 			else
 				count := 0;
-				O_PUSH <= PUSH;
+				O_PUSH <= PUSH;	  -- forwarding PUSH value for every 1000000 clock ticks
 			end if;
 		end if;
 	end process;

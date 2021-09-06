@@ -29,13 +29,13 @@ begin
 				count := count +1;
 			else
 				count := 0;
-				if C = "0000" then
-					if R = "1111" then
+				if C = "0000" then		
+					if R = "1111" then	   -- if no one button is pushed then set PUSH button to 0
 						PUSH <= '0';
 					end if;
 					C <= "0111";
-				elsif C = "0111" then
-					if R = "0111" then
+				elsif C = "0111" then		-- checking column by column
+					if R = "0111" then		-- checking row by row
 					elsif R = "1011" then
 					elsif R = "1101" then
 					elsif R = "1110" then
