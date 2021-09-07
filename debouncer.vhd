@@ -19,20 +19,14 @@ end debouncer;
 
 
 architecture debouncer of debouncer is
+signal DELAY : std_logic_vector(2 downto 0);
 
 begin
-	process(CLK)
-	constant divider : INTEGER := 10000000;
-	variable count : INTEGER RANGE 0 TO divider := 0;
+	process(CLK)									 
 	begin
-		if rising_edge(CLK) then 
-			if count < divider then
-				count := count + 1;
-			else
-				count := 0;
-				O_PUSH <= PUSH;	  -- forwarding PUSH value for every 1000000 clock ticks
-			end if;
+		if rising_edge(CLK) then
+			DELAY <= DELAY(1 downto 0) & PUSH;	-- shift register  
 		end if;
 	end process;
-
+	O_PUSH <= '1' when DELAY = "011" else '0';
 end debouncer;
